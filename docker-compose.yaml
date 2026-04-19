@@ -1,0 +1,16 @@
+name: mol-translation-app
+
+services:
+ jupyter-lab:
+  build: .
+  ports:
+   - "8888:8888"
+  volumes:
+   - ./mol-translation:/mol-translation
+  deploy:
+   resources:
+    reservations:
+     devices:
+      - driver: nvidia
+        count: 1
+        capabilities: [gpu]
