@@ -16,7 +16,7 @@ def _get_atom_count_per_molecule(formula: str, atom: str) -> int:
 
 
 
-def get_inchi_strings_for_atom(atom: str, target_count: int) -> list[str]:
+def get_inchi_strings_for_atom(atom: str, target_count: int, df: pd.DataFrame) -> list[str]:
     """
     returns a list of inchis containing the combined total of target atoms
     e.g. atom=C, count=100 will return random inchis that contain a total of
@@ -24,20 +24,26 @@ def get_inchi_strings_for_atom(atom: str, target_count: int) -> list[str]:
     functions to generate training images.
     """
 
-    df_train_labels = pd.read_csv("../../data/train_labels.csv", nrows=100)
-
-    df_formula = df_train_labels["InChI"].str.split("/", n=2, expand=True)[1]
-
-    print(df_formula)
-
+    result = []
     running_total = 0
 
-    TO_DO
+
     while running_total < target_count:
-        pick an index at random
-        if the target atom is no zero, add it to a list, increment running_total
-        if it is zero
-    
+        random_row = df.sample(n=1)
+        random_formula = random_row["formula"].values[0]
+
+        if not random_formula:
+            continue
+
+        atom_count = _get_atom_count_per_molecule(random_formula, atom)
+        if atom_count == 0:
+            continue
+
+        running_total += atom_count
+        result.append(random_row["InChI"].values[0])
+
+    return result
+
 
 if __name__ == "__main__":
     # get_inchi_strings_for_atom(atom='C', count=50)
