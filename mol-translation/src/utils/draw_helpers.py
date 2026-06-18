@@ -6,7 +6,7 @@ from pathlib import Path
 from PIL import Image
 from io import BytesIO
 from random import choice
-
+import numpy as np
 
 def hello_world(input: str) -> str:
     return f"hello, world, {input}"
@@ -49,6 +49,8 @@ def generate_labelled_images_from_inchi(
         for inchi in inchi_list:
 
             mol = Chem.MolFromInchi(inchi)
+
+            
             AllChem.Compute2DCoords(mol)
             drawer = Draw.rdMolDraw2D.MolDraw2DCairo(height, width)
         
@@ -66,19 +68,25 @@ def generate_labelled_images_from_inchi(
             img_pil = Image.open(BytesIO(img_bytes))
             img_pil.load() # force into memory to prevent Jupyter renering hangs
             img_pil = _add_speckle(img_pil)
-            img_pil.show()
+            # img_pil.show()
 
             save_dir = Path(save_path)
-            save_dir.mkdir(parents=True, exist_ok=True)
+            save_dir_abs = save_dir.resolve()
+
+            save_dir_abs.mkdir(parents=True, exist_ok=True)
         
             # ImageOps.expand(img_pil, border = int(box_size/2), fill="white")
-        
+
+            
             for atom in mol.GetAtoms():
+            #     print(atom.GetSymbol())
+                if atom.GetSymbol() != target_atom:
+                    continue
 
                 if counter % 10 == 0:
                     print (f"Processing image {counter} of {target_image_count}")
         
-                # print(f"{atom.GetSymbol()}_{atom.GetIdx()}.png")
+                # print(f"{atom.GetSymbol()}_{counter}.png")
                 pt = drawer.GetDrawCoords(atom.GetIdx())
                 x = pt.x
                 y = pt.y
@@ -90,12 +98,14 @@ def generate_labelled_images_from_inchi(
         
                 cropped = img_pil.crop((xmin, ymin, xmax, ymax))
                 cropped.load()
-                cropped = add_speckle(cropped)
+                # cropped = add_speckle(cropped)
+
+                save_path = Path( str(save_dir_abs) + f"/{atom.GetSymbol()}_{counter}.png")
             
-                cropped.save(Path(save_path +  f"/{atom.GetSymbol()}/{atom.GetSymbol()}_{atom.GetIdx()}.png"))
+                cropped.save(save_path)
                 cropped.close()
 
-                counter += 1 
+                counter += 1
         
             img_pil.close()
 
