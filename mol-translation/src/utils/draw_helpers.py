@@ -46,7 +46,7 @@ def generate_labelled_images_from_inchi(
     width: int = 350,
     box_size: int = 18,
     target_atom: str = None,
-    save_path_prefix: str = "../data/train_synthetic/", # assumes called from notebooks/ folder
+    save_path_prefix: str = "../data/images/train_synthetic/", # assumes called from notebooks/ folder
     target_image_count: int = 0
 ):
 
