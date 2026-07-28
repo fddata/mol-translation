@@ -38,3 +38,6 @@ save these per atom type in folders of 100?  C/0/0/01.png up to C/9/9/99.png
 Need to do some bond stuff in the data set exploration bit
 get bond coords
 get bond type
+
+
+NEED TO MAKE IMAGES COVER BIGGER AREA SO THAT MODEL HAS SOME CONTEXT OF WHAT ATOMS ARE NEXT TO WHAT ETC
