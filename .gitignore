@@ -1,2 +1,12 @@
+# kaggle data
 /mol-translation/data/*
-/mol-translation/notebooks/.ipynb_checkpoints/*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code Jupyter
+.virtual_documents/
+
+# Python
+__pycache__/
+*.py[cod]
