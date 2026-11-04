@@ -4,3 +4,4 @@ pandas==3.0.2
 rdkit==2026.3.1
 pillow
 ultralytics==8.3.0
+ipykernel==7.3.0
