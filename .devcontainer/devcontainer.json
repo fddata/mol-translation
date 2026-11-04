@@ -1,8 +1,6 @@
 //devcontainer.json
 {
     "name": "MolPytorch",
-    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    // "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
     "build": {
         "dockerfile": "../Dockerfile"
     },
