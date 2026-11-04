@@ -1,2 +1,4 @@
 /mol-translation/data/*
-/mol-translation/notebooks/.ipynb_checkpoints/*
+.ipynb_checkpoints/
+.virtual_documents/
+__pycache__/
