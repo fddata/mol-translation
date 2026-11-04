@@ -45,5 +45,4 @@
     "all",
     "--shm-size=2g"
 ]
-// "remoteUser": "root"
 }
