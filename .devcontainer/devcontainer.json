@@ -24,23 +24,47 @@
                 "charliermarsh.ruff"
             ],
             "settings": {
+                "files.insertFinalNewline": true,
+                "files.trimFinalNewlines": true,
+                "files.trimTrailingWhitespace": true,
                 "jupyter.jupyterServerType": "local",
                 "python.pythonPath": "/opt/conda/bin/python",
                 "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "python.analysis.diagnosticMode": "openFilesOnly",
+                "python.analysis.indexing": true,
+                "python.analysis.exclude": [
+                    "**/.git",
+                    "**/*.pt",
+                    "**/__pycache__",
+                    "**/.ipynb_checkpoints",
+                    "**/.virtual_documents",
+                    "**/.ruff_cache",
+                    "**/data",
+                    "**/datasets",
+                    "**/outputs",
+                    "**/build",
+                    "**/dist"
+                ],
+                "notebook.formatOnSave.enabled": true,
+                "notebook.codeActionsOnSave": {
+                    "notebook.source.fixAll": "explicit",
+                    "notebook.source.organizeImports": "explicit"
+                },
+                "jupyter.notebookFileRoot": "${workspaceFolder}",
                 "[python]": {
                     "editor.defaultFormatter": "charliermarsh.ruff",
                     "editor.formatOnSave": true,
                     "editor.codeActionsOnSave": {
+                        "source.fixAll.ruff": "explicit",
                         "source.organizeImports.ruff": "explicit"
                     }
                 }
             }
         }
     },
-
-"runArgs": [
-    "--gpus",
-    "all",
-    "--shm-size=2g"
-]
+    "runArgs": [
+        "--gpus",
+        "all",
+        "--shm-size=2g"
+    ]
 }
