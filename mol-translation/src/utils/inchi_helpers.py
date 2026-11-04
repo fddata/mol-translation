@@ -1,13 +1,11 @@
-import pandas as pd
 import re
+
+import pandas as pd
 
 
 def _parse_formula(formula):
-    parts = re.findall(r'([A-Z][a-z]?)(\d*)', formula)
-    return {
-        element: int(count) if count else 1
-        for element, count in parts
-    }
+    parts = re.findall(r"([A-Z][a-z]?)(\d*)", formula)
+    return {element: int(count) if count else 1 for element, count in parts}
 
 
 def _get_atom_count_per_molecule(formula: str, atom: str) -> int:
@@ -15,8 +13,9 @@ def _get_atom_count_per_molecule(formula: str, atom: str) -> int:
     return parts.get(atom, 0)
 
 
-
-def get_inchi_strings_for_atom(atom: str, target_count: int, df: pd.DataFrame) -> list[str]:
+def get_inchi_strings_for_atom(
+    atom: str, target_count: int, df: pd.DataFrame
+) -> list[str]:
     """
     returns a list of inchis containing the combined total of target atoms
     e.g. atom=C, count=100 will return random inchis that contain a total of
@@ -26,7 +25,6 @@ def get_inchi_strings_for_atom(atom: str, target_count: int, df: pd.DataFrame) -
 
     result = []
     running_total = 0
-
 
     while running_total < target_count:
         random_row = df.sample(n=1)
