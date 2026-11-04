@@ -1,0 +1,49 @@
+//devcontainer.json
+{
+    "name": "MolPytorch",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    // "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "username": "vscode",
+            "userUid": "automatic",
+            "userGid": "automatic"
+        },
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "charliermarsh.ruff"
+            ],
+            "settings": {
+                "jupyter.jupyterServerType": "local",
+                "python.pythonPath": "/opt/conda/bin/python",
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports.ruff": "explicit"
+                    }
+                }
+            }
+        }
+    },
+
+"runArgs": [
+    "--gpus",
+    "all",
+    "--shm-size=2g"
+]
+// "remoteUser": "root"
+}
